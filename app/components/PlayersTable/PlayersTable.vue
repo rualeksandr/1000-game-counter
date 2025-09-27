@@ -1,0 +1,33 @@
+<template>
+    <div>
+        <div 
+            v-for="(player, index) in players" 
+            class="flex justify-between p-[26px]"
+            :class="[
+                (index % 2) ? 'bg-white' : 'bg-anti-flash-white'
+            ]"
+        >
+            <div>{{ player.name }}</div>
+            <div>{{ player.scores }}</div>
+            <div class="text-danger">{{ player.bolts }}</div>
+        </div>
+        <!-- <div class="flex justify-between p-[26px] bg-anti-flash-white border-l-4 border-accent-blue ">
+            <div>Настя</div>
+            <div>120</div>
+            <div class="text-danger">0</div>
+        </div>-->
+    </div>
+</template>
+
+<script lang="ts" setup>
+import type { Player } from '~/shared/interfaces/players';
+
+const {
+    players = []
+} = defineProps<{
+    players: Player[]
+}>()
+</script>
+
+<style>
+</style>
