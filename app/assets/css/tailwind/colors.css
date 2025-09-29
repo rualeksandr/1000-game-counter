@@ -1,6 +1,9 @@
 @theme {
     --color-danger: #D81B60;
+    --color-success: #34A853;
     --color-anti-flash-white: RGB(241, 243, 244);
     --color-main-bg: #F8F9FA;
     --color-accent-blue: #1E88E5;
+    --color-gray-btn: #F1F3F4;
+    --color-gray-border: #DADCE0;
 }

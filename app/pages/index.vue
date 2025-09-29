@@ -1,10 +1,10 @@
 <template>
-    <div class="bg-main-bg h-screen">
+    <div class="bg-main-bg h-screen overflow-hidden relative">
         <PlayersTable
             v-if="playersStore.players.length"
             :players="playersStore.players"
+            @select-player="playersStore.selectPlayer($event)"
         />
-
         <div 
             v-else
             class="flex h-screen justify-center items-center"
@@ -17,14 +17,14 @@
                 Создать игру
             </button>
         </div>
+        <PlayerInfo />
     </div>
-    <button type="button" @click="drawerVisible = !drawerVisible">модалка</button>
-    <Drawer v-model:visible="drawerVisible">ffjfjfj</Drawer>
+
 </template>
 
 <script lang="ts" setup>
 const router = useRouter();
-import Drawer from '~/components/Drawer/Drawer.vue';
+import PlayerInfo from '~/modules/PlayerInfo/PlayerInfo.vue';
 import PlayersTable from '~/modules/PlayersTable/PlayersTable.vue';
 
 const drawerVisible = ref(false);

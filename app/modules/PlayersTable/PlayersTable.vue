@@ -6,6 +6,7 @@
             :class="[
                 (index % 2) ? 'bg-white' : 'bg-anti-flash-white'
             ]"
+            @click="emit('select-player', player.id)"
         >
             <div>{{ player.name }}</div>
             <div>{{ player.scores }}</div>
@@ -27,6 +28,8 @@ const {
 } = defineProps<{
     players: Player[]
 }>()
+
+const emit = defineEmits(['select-player']);
 </script>
 
 <style>
