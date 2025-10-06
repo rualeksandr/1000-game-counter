@@ -4,19 +4,19 @@
 >
     
     <div 
-        class="h-[50vh] bg-white rounded-t-[16px] shadow-xl/30 transition-all duration-300 ease-in-out p-"
+        class="h-[50vh] bg-white rounded-t-3xl shadow-[0_-2px_10px_0_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out p-"
         :class="{
             'mt-[-50vh]': visible
         }"
     >
         <div>
             <slot name="title">
-                <div class="flex justify-between p-3 items-center">
+                <div class="flex justify-between p-5 items-center text-2xl">
                     <h3>
                         {{ title }}
                     </h3>
                     <button
-                        class="p-2"
+                        class="p-3"
                         type="button"
                         @click="visible = false"
                     >

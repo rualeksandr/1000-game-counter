@@ -12,11 +12,6 @@
             <div>{{ player.scores }}</div>
             <div class="text-danger">{{ player.bolts }}</div>
         </div>
-        <!-- <div class="flex justify-between p-[26px] bg-anti-flash-white border-l-4 border-accent-blue ">
-            <div>Настя</div>
-            <div>120</div>
-            <div class="text-danger">0</div>
-        </div>-->
     </div>
 </template>
 

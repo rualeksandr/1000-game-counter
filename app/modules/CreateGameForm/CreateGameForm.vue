@@ -1,12 +1,12 @@
 <template>
     <div class="p-6">
         <div v-for="(name, i) in usersNames" :key="i"
-            class="flex"
+            class="flex mb-3"
         >
             <input 
                 v-model="usersNames[i]"
                 type="text"
-                class="w-full rounded-xl border border-accent-blue px-3 py-2 mb-3"  
+                class="w-full rounded-xl border border-accent-blue px-3 py-2 mr-2"  
                 placeholder="Введите имя игрока"
             />
             <button
@@ -17,15 +17,15 @@
             </button>
         </div>
         <button 
-            class="text-white rounded-xl bg-accent-blue px-3 py-2 mr-3"
+            class="text-accent-blue rounded-xl border-1 border-accent-blue px-4 py-2 mr-3"
             type="button"
             @click="addPlayer()"
         >
-            Добавить игрока
+            + добавить игрока
         </button>
 
         <button 
-            class="text-white rounded-xl bg-accent-blue px-3 py-2 m"
+            class="text-white rounded-xl bg-accent-blue px-3 py-2 mr-3"
             type="button"
             @click="validateAndSubmitForm()"
         >

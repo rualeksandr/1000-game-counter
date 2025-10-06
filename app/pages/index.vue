@@ -30,6 +30,7 @@ import PlayersTable from '~/modules/PlayersTable/PlayersTable.vue';
 const drawerVisible = ref(false);
 
 const playersStore = usePlayersStore();
+
 </script>
 
 <style>
