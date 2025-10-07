@@ -20,7 +20,7 @@
                         type="button"
                         @click="visible = false"
                     >
-                    <Icon name="material-symbols:close"></Icon>
+                    <Icon mode="svg" name="material-symbols:close"></Icon>
                 </button>
                 </div>
             </slot>

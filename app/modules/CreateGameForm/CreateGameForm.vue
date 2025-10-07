@@ -9,19 +9,21 @@
                 class="w-full rounded-xl border border-accent-blue px-3 py-2 mr-2"  
                 placeholder="Введите имя игрока"
             />
-            <button
-                class="text-white rounded-xl bg-red-400 px-4 py-2"
+            <button 
+                v-if="usersNames.length > 2"
+                class="flex justify-center items-center text-white rounded-xl bg-red-400 px-4 py-2"
                 @click="usersNames.splice(i, 1)"
             >
-            X
+                <Icon name="mdi:close" mode="svg" class="h-4 w-4" />
             </button>
         </div>
         <button 
+            v-if="usersNames.length < 4"
             class="text-accent-blue rounded-xl border-1 border-accent-blue px-4 py-2 mr-3"
             type="button"
             @click="addPlayer()"
         >
-            + добавить игрока
+            + Добавить игрока
         </button>
 
         <button 
@@ -37,14 +39,21 @@
         >
             Укажите имя всем игрокам!
         </span>
+        <span 
+            class="text-red-500"
+            v-show="isErrorBigValue"
+        >
+            Имя не больше 20 символов!
+        </span>
     </div>
 </template>
 
 <script lang="ts" setup>
 const playersStore = usePlayersStore();
 
-const usersNames = ref<string[]>(['']);
+const usersNames = ref<string[]>(['','']);
 const isErrorEmptyValue = ref(false);
+const isErrorBigValue = ref(false);
 
 const addPlayer = () => {
     console.log(usersNames.value);
@@ -53,8 +62,16 @@ const addPlayer = () => {
 
 const validateAndSubmitForm = () => {
     for (let i = 0; i < usersNames.value.length; i++) {
-        if (usersNames.value[i] === '') {
+        if (!usersNames.value[i]) {
             isErrorEmptyValue.value = true;
+            return;
+        }
+        if (usersNames.value[i]!.trim() === '') {
+            isErrorEmptyValue.value = true;
+            return;
+        }
+        if (usersNames.value[i]!.trim().length > 5) { 
+            isErrorBigValue.value = true;
             return;
         }
     }
@@ -65,4 +82,3 @@ const validateAndSubmitForm = () => {
 </script>
 
 <style></style>
-
