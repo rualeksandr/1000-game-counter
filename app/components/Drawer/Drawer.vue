@@ -18,7 +18,7 @@
                     <button
                         class="p-3"
                         type="button"
-                        @click="visible = false"
+                        @click="visible = false; playersStore.selectPlayerId = null"
                     >
                     <Icon mode="svg" name="material-symbols:close"></Icon>
                 </button>
@@ -32,12 +32,14 @@
 </template>
 
 <script lang="ts" setup>
+const playersStore = usePlayersStore();
+
 const visible = defineModel('visible', {
     default: false
 });
 
 const {
-    title = 'hghghgh'
+    title = 'Заголовок'
 } = defineProps<{
     title: string
 }>()

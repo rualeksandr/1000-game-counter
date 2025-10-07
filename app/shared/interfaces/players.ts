@@ -3,5 +3,10 @@ export interface Player {
     name: string
     scores: number
     bolts: number
-    actionHistory: number[]
+    actionHistory: ChangeAccountPayload[]
+}
+
+export interface ChangeAccountPayload {
+    changeType: 'increase' | 'decrease'
+    value: number
 }

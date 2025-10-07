@@ -1,4 +1,5 @@
-import type { Player } from "~/shared/interfaces/players"
+import type { ChangeAccountPayload, Player } from "~/shared/interfaces/players"
+import { roundToNearest5 } from "~/shared/lib/helpers/numbers";
 import { uuidv4 } from "~/shared/lib/uuid"
 
 export const usePlayersStore = defineStore("players", () => {
@@ -6,6 +7,10 @@ export const usePlayersStore = defineStore("players", () => {
     const {playerInfoVisible} = storeToRefs(playerInfoStore)
     const router = useRouter();
     const players = ref<Player[]>([])
+
+    const saveGameState = () => {
+        localStorage.setItem('playersStore', JSON.stringify(players.value));
+    }
 
     const createGame = (arrName: string[]) => {
         players.value = arrName.map((item) => {
@@ -17,6 +22,7 @@ export const usePlayersStore = defineStore("players", () => {
                 actionHistory: []
             }
         })
+        saveGameState();
         router.push('/');
     }
 
@@ -34,11 +40,64 @@ export const usePlayersStore = defineStore("players", () => {
         playerInfoVisible.value = true;
     }
 
+    const changeAccount = (changeAccountPayload: ChangeAccountPayload) => {
+        selectedPlayer.value?.actionHistory.push(changeAccountPayload);
+        
+        if (changeAccountPayload.value === 0) {
+            if (selectedPlayer.value!.bolts >= 2) {
+                selectedPlayer.value!.bolts = 0;
+                changeAccount({
+                    changeType: 'decrease',
+                    value: 120
+                })
+            } else {
+                selectedPlayer.value!.bolts += 1;
+            }
+            saveGameState();
+            return
+        }
+        selectedPlayer.value!.bolts = 0;
+        if (changeAccountPayload.changeType === 'increase') {
+            selectedPlayer.value!.scores += roundToNearest5(changeAccountPayload.value);
+        } else { 
+            selectedPlayer.value!.scores -= roundToNearest5(changeAccountPayload.value);
+        }
+        saveGameState();
+    }
+
+    
+    const loadGameState = () => {
+        const state = localStorage.getItem('playersStore');
+        if (state) {
+            players.value = JSON.parse(state);
+        }
+    }
+    
+    const deleteGameState = () => {
+        localStorage.removeItem('playersStore');
+    }
+
+    const checkGameState = () => {
+        return !!localStorage.getItem('playersStore');
+    }
+
+    const endGame = () => {
+        deleteGameState();
+        players.value = [];
+    }
+
     return {
         players, 
         createGame,
         selectedPlayer,
-        selectPlayer
+        selectPlayerId,
+        selectPlayer,
+        changeAccount,
+        saveGameState,
+        loadGameState,
+        deleteGameState,
+        checkGameState,
+        endGame
     }
 })
 

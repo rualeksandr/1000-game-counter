@@ -6,7 +6,9 @@
     >
             <ChangePlayerForm />
             <span class="text-2xl p-5 text-center">История</span>
-            <AccountHistory />
+            <AccountHistory 
+                :history="playersStore.selectedPlayer?.actionHistory"
+            />
     </Drawer>
 </div>
 </template>

@@ -1,25 +1,30 @@
 <template>
     <div class="p-6">
+        <h3 class="text-2xl mb-3">Настройка игры</h3>
+        <h4 class="text-lg mb-3">Выберите игроков:</h4>
         <div v-for="(name, i) in usersNames" :key="i"
             class="flex mb-3"
         >
             <input 
                 v-model="usersNames[i]"
                 type="text"
-                class="w-full rounded-xl border border-accent-blue px-3 py-2 mr-2"  
+                class="w-full rounded-xl border border-accent-blue px-3 py-2"  
                 placeholder="Введите имя игрока"
             />
             <button 
                 v-if="usersNames.length > 2"
-                class="flex justify-center items-center text-white rounded-xl bg-red-400 px-4 py-2"
+                class="flex justify-center items-center text-white rounded-xl bg-red-400 px-4 py-2 ml-2"
                 @click="usersNames.splice(i, 1)"
             >
                 <Icon name="mdi:close" mode="svg" class="h-4 w-4" />
             </button>
         </div>
+
+        
+
         <button 
             v-if="usersNames.length < 4"
-            class="text-accent-blue rounded-xl border-1 border-accent-blue px-4 py-2 mr-3"
+            class="w-full text-accent-blue rounded-xl border-1 border-dashed border-accent-blue px-4 py-2 mb-3"
             type="button"
             @click="addPlayer()"
         >
@@ -70,7 +75,7 @@ const validateAndSubmitForm = () => {
             isErrorEmptyValue.value = true;
             return;
         }
-        if (usersNames.value[i]!.trim().length > 5) { 
+        if (usersNames.value[i]!.trim().length > 20) { 
             isErrorBigValue.value = true;
             return;
         }
